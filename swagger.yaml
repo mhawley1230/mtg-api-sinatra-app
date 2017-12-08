@@ -1,0 +1,681 @@
+---
+swagger: "2.0"
+info:
+  description: "pull and post events and top 8 decklists"
+  version: "1.0.0"
+  title: "MtG API"
+host: "virtserver.swaggerhub.com"
+basePath: "/mhawley/mtg-tournaments/1.0.0"
+tags:
+- name: "tournaments"
+- name: "decks"
+- name: "cards"
+schemes:
+- "https"
+paths:
+  /tournaments:
+    get:
+      tags:
+      - "tournaments"
+      description: "Allow users to get events"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Tournament"
+        400:
+          description: "invalid value provided"
+          schema:
+            $ref: "#/definitions/inline_response_400"
+        404:
+          description: "resource not found"
+          schema:
+            $ref: "#/definitions/inline_response_404"
+    post:
+      tags:
+      - "tournaments"
+      summary: "Allows users to post events with top 8 decklists and card info"
+      description: "Allows users to post events data"
+      parameters:
+      - in: "body"
+        name: "name"
+        description: "event description"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/name"
+      responses:
+        200:
+          description: "event successfully posted"
+          schema:
+            $ref: "#/definitions/Tournament"
+        400:
+          description: "invalid value provided"
+          schema:
+            $ref: "#/definitions/inline_response_400"
+  /tournaments/{id}:
+    get:
+      tags:
+      - "tournaments"
+      description: "Allows users to search for an event by id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "event id"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "search results matching query"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        400:
+          description: "invalid value provided"
+          schema:
+            $ref: "#/definitions/inline_response_400"
+        404:
+          description: "resource not found"
+          schema:
+            $ref: "#/definitions/inline_response_404"
+  /tournaments/findByName:
+    get:
+      tags:
+      - "tournaments"
+      summary: "Allows users to find events by name of event"
+      parameters:
+      - name: "name"
+        in: "query"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successfully found resource"
+          schema:
+            $ref: "#/definitions/Tournament"
+        400:
+          description: "invalid value provided"
+          schema:
+            $ref: "#/definitions/inline_response_400"
+        404:
+          description: "resource not found"
+          schema:
+            $ref: "#/definitions/inline_response_404"
+  /decks:
+    get:
+      tags:
+      - "decks"
+      description: "Allow users to get decks"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Deck"
+        400:
+          description: "invalid value provided"
+          schema:
+            $ref: "#/definitions/inline_response_400"
+        404:
+          description: "resource not found"
+          schema:
+            $ref: "#/definitions/inline_response_404"
+  /decks/{id}:
+    get:
+      tags:
+      - "decks"
+      description: "Allows users to search for an event by id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "event id"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "search results matching query"
+          schema:
+            $ref: "#/definitions/inline_response_200_1"
+        400:
+          description: "invalid value provided"
+          schema:
+            $ref: "#/definitions/inline_response_400"
+        404:
+          description: "resource not found"
+          schema:
+            $ref: "#/definitions/inline_response_404"
+  /decks/findByName:
+    get:
+      tags:
+      - "decks"
+      summary: "Allows users to find decks by name"
+      parameters:
+      - name: "name"
+        in: "query"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successfully found resource"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        400:
+          description: "invalid value provided"
+          schema:
+            $ref: "#/definitions/inline_response_400"
+        404:
+          description: "resource not found"
+          schema:
+            $ref: "#/definitions/inline_response_404"
+  /decks/findByPlayer:
+    get:
+      tags:
+      - "decks"
+      summary: "Allows users to find decks by player"
+      parameters:
+      - name: "player"
+        in: "query"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successfully found resource"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        400:
+          description: "invalid value provided"
+          schema:
+            $ref: "#/definitions/inline_response_400"
+        404:
+          description: "resource not found"
+          schema:
+            $ref: "#/definitions/inline_response_404"
+  /decks/findByPlacing:
+    get:
+      tags:
+      - "decks"
+      summary: "Allows users to find decks by event placing"
+      parameters:
+      - name: "placing"
+        in: "query"
+        required: true
+        type: "integer"
+        maximum: 8
+        minimum: 1
+      responses:
+        200:
+          description: "successfully found resource"
+          schema:
+            $ref: "#/definitions/inline_response_200_2"
+        400:
+          description: "invalid value provided"
+          schema:
+            $ref: "#/definitions/inline_response_400"
+        404:
+          description: "resource not found"
+          schema:
+            $ref: "#/definitions/inline_response_404"
+  /cards:
+    get:
+      tags:
+      - "cards"
+      description: "Allow users to get all cards"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Card"
+        400:
+          description: "invalid value provided"
+          schema:
+            $ref: "#/definitions/inline_response_400"
+        404:
+          description: "resource not found"
+          schema:
+            $ref: "#/definitions/inline_response_404"
+  /cards/{id}:
+    get:
+      tags:
+      - "cards"
+      description: "Allows users to search for an event by id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "event id"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "search results matching query"
+          schema:
+            $ref: "#/definitions/inline_response_200_3"
+        400:
+          description: "invalid value provided"
+          schema:
+            $ref: "#/definitions/inline_response_400"
+        404:
+          description: "resource not found"
+          schema:
+            $ref: "#/definitions/inline_response_404"
+  /cards/findByName:
+    get:
+      tags:
+      - "cards"
+      summary: "Allows users to find cards by name"
+      parameters:
+      - name: "name"
+        in: "query"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successfully found resource"
+          schema:
+            $ref: "#/definitions/inline_response_200_4"
+        400:
+          description: "invalid value provided"
+          schema:
+            $ref: "#/definitions/inline_response_400"
+        404:
+          description: "resource not found"
+          schema:
+            $ref: "#/definitions/inline_response_404"
+  /cards/findByColors:
+    get:
+      tags:
+      - "cards"
+      summary: "find by color(s)"
+      parameters:
+      - name: "color"
+        in: "query"
+        required: true
+        type: "string"
+        enum:
+        - "white"
+        - "blue"
+        - "black"
+        - "green"
+        - "red"
+        - "colorless"
+      responses:
+        200:
+          description: "successfully found resource"
+          schema:
+            $ref: "#/definitions/Card"
+        400:
+          description: "invalid value provided"
+          schema:
+            $ref: "#/definitions/inline_response_400"
+        404:
+          description: "resource not found"
+          schema:
+            $ref: "#/definitions/inline_response_404"
+definitions:
+  Tournament:
+    type: "object"
+    required:
+    - "date"
+    - "decks"
+    - "format"
+    - "id"
+    - "location"
+    - "name"
+    - "no_of_players"
+    properties:
+      id:
+        type: "integer"
+        example: 222
+      name:
+        type: "string"
+        example: "Friday Night Magic"
+      format:
+        type: "string"
+        example: "Standard"
+      no_of_players:
+        type: "integer"
+        example: 200
+      location:
+        type: "string"
+        example: "Boston, MA"
+      date:
+        type: "string"
+        example: "12/30/2017"
+      decks:
+        type: "array"
+        items:
+          $ref: "#/definitions/Deck"
+    example:
+      date: "12/30/2017"
+      name: "Friday Night Magic"
+      format: "Standard"
+      no_of_players: 200
+      location: "Boston, MA"
+      decks:
+      - cards:
+        - image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+          name: "Torrential Gearhulk"
+          no_played: 3
+          id: 315
+          main_deck: true
+          colors: "Blue"
+        - image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+          name: "Torrential Gearhulk"
+          no_played: 3
+          id: 315
+          main_deck: true
+          colors: "Blue"
+        name: "UR Control"
+        id: 256
+        placing: 1
+        player: "Luis Scott-Vargas"
+      - cards:
+        - image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+          name: "Torrential Gearhulk"
+          no_played: 3
+          id: 315
+          main_deck: true
+          colors: "Blue"
+        - image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+          name: "Torrential Gearhulk"
+          no_played: 3
+          id: 315
+          main_deck: true
+          colors: "Blue"
+        name: "UR Control"
+        id: 256
+        placing: 1
+        player: "Luis Scott-Vargas"
+      id: 222
+  Deck:
+    type: "object"
+    required:
+    - "cards"
+    - "id"
+    - "name"
+    - "placing"
+    - "player"
+    properties:
+      id:
+        type: "integer"
+        example: 256
+      name:
+        type: "string"
+        example: "UR Control"
+      placing:
+        type: "integer"
+        example: 1
+      player:
+        type: "string"
+        example: "Luis Scott-Vargas"
+      cards:
+        type: "array"
+        items:
+          $ref: "#/definitions/Card"
+    example:
+      cards:
+      - image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+        name: "Torrential Gearhulk"
+        no_played: 3
+        id: 315
+        main_deck: true
+        colors: "Blue"
+      - image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+        name: "Torrential Gearhulk"
+        no_played: 3
+        id: 315
+        main_deck: true
+        colors: "Blue"
+      name: "UR Control"
+      id: 256
+      placing: 1
+      player: "Luis Scott-Vargas"
+  Card:
+    type: "object"
+    required:
+    - "colors"
+    - "id"
+    - "image_url"
+    - "main_deck"
+    - "name"
+    - "no_played"
+    properties:
+      id:
+        type: "integer"
+        example: 315
+      name:
+        type: "string"
+        example: "Torrential Gearhulk"
+      no_played:
+        type: "integer"
+        example: 3
+      colors:
+        type: "string"
+        example: "Blue"
+      image_url:
+        type: "string"
+        example: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+      main_deck:
+        type: "boolean"
+        example: true
+    example:
+      image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+      name: "Torrential Gearhulk"
+      no_played: 3
+      id: 315
+      main_deck: true
+      colors: "Blue"
+  inline_response_400:
+    properties:
+      status:
+        type: "integer"
+        example: 400
+        description: "status code"
+      message:
+        type: "string"
+        example: "Invalid value provided"
+        description: "status message string"
+  inline_response_404:
+    properties:
+      status:
+        type: "integer"
+        example: 404
+        description: "status code"
+      message:
+        type: "string"
+        example: "Resource not found"
+        description: "status string"
+  name:
+    required:
+    - "date"
+    - "decks"
+    - "format"
+    - "location"
+    - "name"
+    properties:
+      name:
+        type: "string"
+        example: "Friday Night Magic"
+        description: "event name"
+      format:
+        type: "string"
+        example: "Standard"
+        description: "event format"
+      location:
+        type: "string"
+        example: "Boston, MA"
+        description: "event location"
+      date:
+        type: "string"
+        example: "12/30/2017"
+        description: "event date"
+      decks:
+        type: "array"
+        items:
+          $ref: "#/definitions/Tournament"
+  inline_response_200:
+    properties:
+      status:
+        type: "integer"
+        example: 200
+        description: "status code"
+      result:
+        $ref: "#/definitions/Tournament"
+    example:
+      result:
+        date: "12/30/2017"
+        name: "Friday Night Magic"
+        format: "Standard"
+        no_of_players: 200
+        location: "Boston, MA"
+        decks:
+        - cards:
+          - image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+            name: "Torrential Gearhulk"
+            no_played: 3
+            id: 315
+            main_deck: true
+            colors: "Blue"
+          - image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+            name: "Torrential Gearhulk"
+            no_played: 3
+            id: 315
+            main_deck: true
+            colors: "Blue"
+          name: "UR Control"
+          id: 256
+          placing: 1
+          player: "Luis Scott-Vargas"
+        - cards:
+          - image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+            name: "Torrential Gearhulk"
+            no_played: 3
+            id: 315
+            main_deck: true
+            colors: "Blue"
+          - image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+            name: "Torrential Gearhulk"
+            no_played: 3
+            id: 315
+            main_deck: true
+            colors: "Blue"
+          name: "UR Control"
+          id: 256
+          placing: 1
+          player: "Luis Scott-Vargas"
+        id: 222
+      status: 200
+  inline_response_200_1:
+    properties:
+      status:
+        type: "integer"
+        example: 200
+        description: "status code"
+      result:
+        $ref: "#/definitions/Deck"
+    example:
+      result:
+        cards:
+        - image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+          name: "Torrential Gearhulk"
+          no_played: 3
+          id: 315
+          main_deck: true
+          colors: "Blue"
+        - image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+          name: "Torrential Gearhulk"
+          no_played: 3
+          id: 315
+          main_deck: true
+          colors: "Blue"
+        name: "UR Control"
+        id: 256
+        placing: 1
+        player: "Luis Scott-Vargas"
+      status: 200
+  inline_response_200_2:
+    properties:
+      result:
+        $ref: "#/definitions/Deck"
+    example:
+      result:
+        cards:
+        - image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+          name: "Torrential Gearhulk"
+          no_played: 3
+          id: 315
+          main_deck: true
+          colors: "Blue"
+        - image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+          name: "Torrential Gearhulk"
+          no_played: 3
+          id: 315
+          main_deck: true
+          colors: "Blue"
+        name: "UR Control"
+        id: 256
+        placing: 1
+        player: "Luis Scott-Vargas"
+  inline_response_200_3:
+    properties:
+      status:
+        type: "integer"
+        example: 200
+        description: "status code"
+      result:
+        $ref: "#/definitions/Card"
+    example:
+      result:
+        image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+        name: "Torrential Gearhulk"
+        no_played: 3
+        id: 315
+        main_deck: true
+        colors: "Blue"
+      status: 200
+  inline_response_200_4:
+    properties:
+      result:
+        $ref: "#/definitions/Card"
+    example:
+      result:
+        image_url: "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=420589&type=card"
+        name: "Torrential Gearhulk"
+        no_played: 3
+        id: 315
+        main_deck: true
+        colors: "Blue"
+responses:
+  400Response:
+    description: "invalid value provided"
+    schema:
+      type: "object"
+      properties:
+        status:
+          type: "integer"
+          example: 400
+          description: "status code"
+        message:
+          type: "string"
+          example: "Invalid value provided"
+          description: "status message string"
+  404Response:
+    description: "resource not found"
+    schema:
+      type: "object"
+      properties:
+        status:
+          type: "integer"
+          example: 404
+          description: "status code"
+        message:
+          type: "string"
+          example: "Resource not found"
+          description: "status string"
