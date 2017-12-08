@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem "sinatra"
 gem "sinatra-cross_origin"
-gem 'activerecord', '>= 4.2.0'
+gem 'activerecord', '~> 4.2.7.1'
 gem 'sinatra-activerecord'
 gem 'thin'
 gem 'require_all'
