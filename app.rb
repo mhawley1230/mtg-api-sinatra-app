@@ -1,9 +1,13 @@
 require './lib/swaggering'
 require 'sinatra'
-require 'active_record'
+require 'sinatra/activerecord'
+require 'pry'
+
+current_dir = Dir.pwd
+Dir["#{current_dir}/models/*.rb"].each { |file| require file }
 
 # only need to extend if you want special configuration!
-class MyApp < Swaggering
+class App < Swaggering
   self.configure do |config|
     config.api_version = '1.0.0'
   end
@@ -15,5 +19,6 @@ Dir["./api/*.rb"].each { |file|
 }
 
 get '/' do
-  "Hello world"
+  @tournaments = Tournament.all
+  erb :'tournaments/index'
 end

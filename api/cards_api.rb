@@ -1,7 +1,7 @@
 require 'json'
 
 
-MyApp.add_route('GET', '/mtg-tournaments/1.0.0/cards/findByColors', {
+App.add_route('GET', '/mtg-tournaments/1.0.0/cards/findByColors', {
   "resourcePath" => "/Cards",
   "summary" => "find by color(s)",
   "nickname" => "cards_find_by_colors_get",
@@ -26,7 +26,7 @@ MyApp.add_route('GET', '/mtg-tournaments/1.0.0/cards/findByColors', {
 end
 
 
-MyApp.add_route('GET', '/mtg-tournaments/1.0.0/cards/findByName', {
+App.add_route('GET', '/mtg-tournaments/1.0.0/cards/findByName', {
   "resourcePath" => "/Cards",
   "summary" => "Allows users to find cards by name",
   "nickname" => "cards_find_by_name_get",
@@ -51,7 +51,7 @@ MyApp.add_route('GET', '/mtg-tournaments/1.0.0/cards/findByName', {
 end
 
 
-MyApp.add_route('GET', '/mtg-tournaments/1.0.0/cards', {
+App.add_route('GET', '/mtg-tournaments/1.0.0/cards', {
   "resourcePath" => "/Cards",
   "summary" => "",
   "nickname" => "cards_get",
@@ -67,7 +67,7 @@ MyApp.add_route('GET', '/mtg-tournaments/1.0.0/cards', {
 end
 
 
-MyApp.add_route('GET', '/mtg-tournaments/1.0.0/cards/{id}', {
+App.add_route('GET', '/mtg-tournaments/1.0.0/cards/{id}', {
   "resourcePath" => "/Cards",
   "summary" => "",
   "nickname" => "cards_id_get",

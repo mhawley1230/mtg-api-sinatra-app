@@ -1,7 +1,7 @@
 require 'json'
 
 
-MyApp.add_route('GET', '/mtg-tournaments/1.0.0/decks/findByName', {
+App.add_route('GET', '/mtg-tournaments/1.0.0/decks/findByName', {
   "resourcePath" => "/Decks",
   "summary" => "Allows users to find decks by name",
   "nickname" => "decks_find_by_name_get",
@@ -26,7 +26,7 @@ MyApp.add_route('GET', '/mtg-tournaments/1.0.0/decks/findByName', {
 end
 
 
-MyApp.add_route('GET', '/mtg-tournaments/1.0.0/decks/findByPlacing', {
+App.add_route('GET', '/mtg-tournaments/1.0.0/decks/findByPlacing', {
   "resourcePath" => "/Decks",
   "summary" => "Allows users to find decks by event placing",
   "nickname" => "decks_find_by_placing_get",
@@ -51,7 +51,7 @@ MyApp.add_route('GET', '/mtg-tournaments/1.0.0/decks/findByPlacing', {
 end
 
 
-MyApp.add_route('GET', '/mtg-tournaments/1.0.0/decks/findByPlayer', {
+App.add_route('GET', '/mtg-tournaments/1.0.0/decks/findByPlayer', {
   "resourcePath" => "/Decks",
   "summary" => "Allows users to find decks by player",
   "nickname" => "decks_find_by_player_get",
@@ -76,7 +76,7 @@ MyApp.add_route('GET', '/mtg-tournaments/1.0.0/decks/findByPlayer', {
 end
 
 
-MyApp.add_route('GET', '/mtg-tournaments/1.0.0/decks', {
+App.add_route('GET', '/mtg-tournaments/1.0.0/decks', {
   "resourcePath" => "/Decks",
   "summary" => "",
   "nickname" => "decks_get",
@@ -92,7 +92,7 @@ MyApp.add_route('GET', '/mtg-tournaments/1.0.0/decks', {
 end
 
 
-MyApp.add_route('GET', '/mtg-tournaments/1.0.0/decks/{id}', {
+App.add_route('GET', '/mtg-tournaments/1.0.0/decks/{id}', {
   "resourcePath" => "/Decks",
   "summary" => "",
   "nickname" => "decks_id_get",

@@ -1,7 +1,7 @@
 require 'json'
 
 
-MyApp.add_route('GET', '/mtg-tournaments/1.0.0/tournaments/findByName', {
+App.add_route('GET', '/mtg-tournaments/1.0.0/tournaments/findByName', {
   "resourcePath" => "/Tournaments",
   "summary" => "Allows users to find events by name of event",
   "nickname" => "tournaments_find_by_name_get",
@@ -26,7 +26,7 @@ MyApp.add_route('GET', '/mtg-tournaments/1.0.0/tournaments/findByName', {
 end
 
 
-MyApp.add_route('GET', '/mtg-tournaments/1.0.0/tournaments', {
+App.add_route('GET', '/mtg-tournaments/1.0.0/tournaments', {
   "resourcePath" => "/Tournaments",
   "summary" => "",
   "nickname" => "tournaments_get",
@@ -42,7 +42,7 @@ MyApp.add_route('GET', '/mtg-tournaments/1.0.0/tournaments', {
 end
 
 
-MyApp.add_route('GET', '/mtg-tournaments/1.0.0/tournaments/{id}', {
+App.add_route('GET', '/mtg-tournaments/1.0.0/tournaments/{id}', {
   "resourcePath" => "/Tournaments",
   "summary" => "",
   "nickname" => "tournaments_id_get",
@@ -64,7 +64,7 @@ MyApp.add_route('GET', '/mtg-tournaments/1.0.0/tournaments/{id}', {
 end
 
 
-MyApp.add_route('POST', '/mtg-tournaments/1.0.0/tournaments', {
+App.add_route('POST', '/mtg-tournaments/1.0.0/tournaments', {
   "resourcePath" => "/Tournaments",
   "summary" => "Allows users to post events with top 8 decklists and card info",
   "nickname" => "tournaments_post",
